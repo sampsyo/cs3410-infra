@@ -12,8 +12,11 @@ jobs:
       registry: ghcr.io
       username: ${{github.actor}}
       password: ${{secrets.GITHUB_TOKEN}}
-  - name: Build and push image
-    uses: docker/build-push-action@v5
+  - uses: depot/setup-action@v1
+  - uses: depot/build-push-action@v1
     with:
+      project: 6mczp3kf9v
+      context: container
+      platforms: linux/amd64  # eventually add: ,linux/arm64
       push: true
-      tags: ghcr.io/sampsyo/cs3410:latest
+      tags: ghcr.io/sampsyo/cs3410-infra:latest
