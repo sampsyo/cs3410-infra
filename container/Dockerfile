@@ -24,5 +24,5 @@ RUN ./configure --target-list=riscv32-linux-user && make -j
 FROM docker.io/ubuntu:24.04
 COPY --from=toolchain /opt/riscv /opt/riscv
 COPY --from=qemu /qemu-9.0.0/build/qemu-riscv32 /usr/local/bin/
-RUN ln -s /opt/riscv/bin/* /usr/local/bin/
+env PATH $PATH:/opt/riscv/bin
 WORKDIR /root
