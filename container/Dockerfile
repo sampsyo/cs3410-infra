@@ -10,7 +10,8 @@ RUN apt-get update && \
 FROM env AS toolchain
 RUN git clone --recursive https://github.com/riscv/riscv-gnu-toolchain
 WORKDIR /riscv-gnu-toolchain
-RUN ./configure --prefix=/opt/riscv && make -j linux
+RUN ./configure --prefix=/opt/riscv --with-arch=rv32gc --with-abi=ilp32d && \
+    make -j linux
 
 FROM env AS qemu
 RUN curl -O https://download.qemu.org/qemu-9.0.0.tar.xz && \
