@@ -1,0 +1,17 @@
+# Both sourceware.org and gcc.gnu.org seem to have problems when connecting
+# from AWS, which complicates Depot builds. We use SourceHut mirrors.
+
+[url "https://git.sr.ht/~sourceware/binutils-gdb"]
+    insteadOf = https://sourceware.org/git/binutils-gdb.git
+
+[url "https://git.sr.ht/~sourceware/glibc"]
+    insteadOf = https://sourceware.org/git/glibc.git
+
+[url "https://git.sr.ht/~sourceware/newlib-cygwin"]
+    insteadOf = https://sourceware.org/git/newlib-cygwin.git
+
+[url "https://git.sr.ht/~sourceware/binutils-gdb"]
+    insteadOf = https://sourceware.org/git/binutils-gdb.git
+
+[url "https://git.sr.ht/~sourceware/gcc"]
+    insteadOf = https://gcc.gnu.org/git/gcc.git
