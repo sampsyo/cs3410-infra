@@ -22,7 +22,10 @@ WORKDIR /qemu-9.0.0
 RUN ./configure --target-list=riscv32-linux-user && make -j
 
 FROM docker.io/ubuntu:24.04
-COPY --from=toolchain /opt/riscv /opt/riscv
+RUN apt-get update && \
+    apt-get install -y python3 && \
+    apt-get clean
 COPY --from=qemu /qemu-9.0.0/build/qemu-riscv32 /usr/local/bin/
+COPY --from=toolchain /opt/riscv /opt/riscv
 env PATH $PATH:/opt/riscv/bin
 WORKDIR /root
