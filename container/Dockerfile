@@ -1,7 +1,10 @@
 FROM docker.io/ubuntu:24.04 AS env
 RUN apt-get update && \
-    apt-get install -y build-essential curl git ninja-build glib2.0-dev gawk \
-        python3-venv python3-sphinx-rtd-theme && \
+    apt-get install -y build-essential curl git ninja-build \
+        autoconf automake autotools-dev libmpc-dev libmpfr-dev libgmp-dev \
+        gawk build-essential bison flex texinfo gperf libtool patchutils \
+        bc zlib1g-dev libexpat-dev cmake libglib2.0-dev libslirp-dev \
+        python3-pip python3-venv python3-sphinx-rtd-theme && \
     apt-get clean
 
 FROM env AS toolchain
