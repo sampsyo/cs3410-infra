@@ -13,7 +13,7 @@ RUN git clone --recursive --shallow-submodules \
     https://github.com/riscv/riscv-gnu-toolchain
 WORKDIR /riscv-gnu-toolchain
 RUN ./configure --prefix=/opt/riscv --with-arch=rv32g --with-abi=ilp32d && \
-    make -j linux
+    make -j2 linux
 
 FROM env AS qemu
 RUN curl -O https://download.qemu.org/qemu-9.0.0.tar.xz && \
