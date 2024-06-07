@@ -28,5 +28,5 @@ jobs:
           push: true
           tags: ghcr.io/sampsyo/cs3410-infra:latest
           labels: |
-            org.opencontainers.image.source=https://github.com/${{GITHUB_REPOSITORY}}
+            org.opencontainers.image.source=https://github.com/${{github.repository}}
             org.opencontainers.image.description=RISC-V tooling for CS 3410
