@@ -9,7 +9,8 @@ RUN apt-get update && \
 
 FROM env AS toolchain
 COPY gitconfig /root/.gitconfig
-RUN git clone --recursive https://github.com/riscv/riscv-gnu-toolchain
+RUN git clone --recursive --shallow-submodules \
+    https://github.com/riscv/riscv-gnu-toolchain
 WORKDIR /riscv-gnu-toolchain
 RUN ./configure --prefix=/opt/riscv --with-arch=rv32gc --with-abi=ilp32d && \
     make -j linux

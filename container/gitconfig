@@ -7,7 +7,7 @@
 [url "https://git.sr.ht/~sourceware/glibc"]
     insteadOf = https://sourceware.org/git/glibc.git
 
-[url "https://git.sr.ht/~sourceware/newlib-cygwin"]
+[url "https://github.com/mirror/newlib-cygwin.git"]
     insteadOf = https://sourceware.org/git/newlib-cygwin.git
 
 [url "https://git.sr.ht/~sourceware/binutils-gdb"]
