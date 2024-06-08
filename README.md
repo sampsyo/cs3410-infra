@@ -23,3 +23,14 @@ Here's an example showing compilation and execution of a C program:
 
 [depot]: https://depot.dev/?utm_source=capra
 [container]: https://github.com/sampsyo/cs3410-infra/pkgs/container/cs3410-infra
+[docker]: https://www.docker.com
+
+Visual Studio Code Setup
+------------------------
+
+There is also a simple [devcontainer][] configuration and `c_cpp_properties.json` configuration file for [Visual Studio Code][vscode].
+Try opening this repository in VSCode and writing a simple C program to try it out.
+The app should hopefully prompt you to "Reopen in Container," if you have the "Dev Containers" extension.
+
+[devcontainer]: https://containers.dev
+[vscode]: https://vscode.dev
