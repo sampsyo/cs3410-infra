@@ -23,7 +23,7 @@ RUN ./configure --target-list=riscv32-linux-user && make -j
 
 FROM docker.io/ubuntu:24.04
 RUN apt-get update && \
-    apt-get install -y python3 libmpc-dev libglib2.0 && \
+    apt-get install -y python3 libmpc-dev libglib2.0 git && \
     apt-get clean
 COPY --from=qemu /qemu-9.0.0/build/qemu-riscv32 /usr/local/bin/
 COPY --from=toolchain /opt/riscv /opt/riscv
