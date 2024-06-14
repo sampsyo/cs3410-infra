@@ -10,10 +10,24 @@ RUN apt-get update && \
 FROM env AS toolchain
 COPY gitconfig /root/.gitconfig
 RUN git clone --recursive --shallow-submodules \
-    https://github.com/riscv/riscv-gnu-toolchain
+   https://github.com/riscv/riscv-gnu-toolchain
 WORKDIR /riscv-gnu-toolchain
 RUN ./configure --prefix=/opt/riscv --with-arch=rv32g --with-abi=ilp32d && \
-    make -j2 linux
+   make -j2 linux
+RUN git clone \ 
+    https://github.com/riscv-software-src/riscv-pk.git
+
+FROM env AS spike 
+COPY gitconfig /root/.gitconfig
+RUN apt-get update && \
+    apt-get install -y device-tree-compiler libboost-regex-dev libboost-system-dev libboost-thread-dev && \
+    apt-get clean
+RUN git clone \
+    https://github.com/riscv-software-src/riscv-isa-sim.git
+WORKDIR /riscv-isa-sim
+RUN ./configure --prefix=/opt/riscv --with-arch=rv32g && \
+    make && \ 
+    make install
 
 FROM env AS qemu
 RUN curl -O https://download.qemu.org/qemu-9.0.0.tar.xz && \
@@ -23,9 +37,11 @@ RUN ./configure --target-list=riscv32-linux-user && make -j
 
 FROM docker.io/ubuntu:24.04
 RUN apt-get update && \
-    apt-get install -y python3 libmpc-dev libglib2.0 git && \
+    apt-get install -y python3 libmpc-dev libglib2.0 git \
+    device-tree-compiler && \
     apt-get clean
 COPY --from=qemu /qemu-9.0.0/build/qemu-riscv32 /usr/local/bin/
 COPY --from=toolchain /opt/riscv /opt/riscv
+COPY --from=spike /opt/riscv /opt/riscv
 env PATH $PATH:/opt/riscv/bin
 WORKDIR /root
