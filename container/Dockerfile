@@ -14,8 +14,6 @@ RUN git clone --recursive --shallow-submodules \
 WORKDIR /riscv-gnu-toolchain
 RUN ./configure --prefix=/opt/riscv --with-arch=rv32g --with-abi=ilp32d && \
    make -j2 linux
-RUN git clone \ 
-    https://github.com/riscv-software-src/riscv-pk.git
 
 FROM env AS spike 
 COPY gitconfig /root/.gitconfig
@@ -24,8 +22,8 @@ RUN apt-get update && \
     apt-get clean
 RUN git clone \
     https://github.com/riscv-software-src/riscv-isa-sim.git
-WORKDIR /riscv-isa-sim
-RUN ./configure --prefix=/opt/riscv --with-arch=rv32g && \
+WORKDIR /riscv-isa-sim/build
+RUN ../configure --prefix=/opt/riscv --with-arch=rv32g && \
     make && \ 
     make install
 
