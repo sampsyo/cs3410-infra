@@ -44,13 +44,13 @@ To run the image on a machine that is NOT Apple silicon (i.e. Windows and Intel 
 - Install Docker 
 - Start the Docker Daemon
 - `docker pull ghcr.io/sampsyo/cs3410-infra`
-- `docker run -it -v --rm <absolute path to "shared">:/home/student/shared gchr.io/sampsyo/cs3410-infra bash`
+- `docker run -it -v --rm <absolute path to "shared">:/root gchr.io/sampsyo/cs3410-infra bash`
 
 To run the image on Apple silicon: 
 - Install Docker (`brew install --cask docker`)
 - Start Docker using `docker ps` 
 - `docker pull ghcr.io/sampsyo/cs3410-infra`
-- `docker run -it --platform linux/amd64 -v --rm <absolute path to "shared">:/home/student/shared gchr.io/sampsyo/cs3410-infra bash`
+- `docker run -it -v --rm <absolute path to "shared">:/root gchr.io/sampsyo/cs3410-infra bash`
 
 Notes:
 - The shared folder you are on must exist locally. Create some directory on your machine for your 3410 work this semester, and use this as your shared directory 
