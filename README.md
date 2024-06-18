@@ -36,7 +36,8 @@ The app should hopefully prompt you to "Reopen in Container," if you have the "D
 [vscode]: https://vscode.dev
 
 Docker Instructions
-------------------------
+-------------------
+
 We will be using the Docker container to run all of your code this semester. You'll be able to write your files in a local directory and then run the code in the container. 
 
 To run the image on a machine that is NOT Apple silicon (i.e. Windows and Intel Macs):
