@@ -34,3 +34,25 @@ The app should hopefully prompt you to "Reopen in Container," if you have the "D
 
 [devcontainer]: https://containers.dev
 [vscode]: https://vscode.dev
+
+Docker Instructions
+-------------------
+
+We will be using the Docker container to run all of your code this semester. You'll be able to write your files in a local directory and then run the code in the container. 
+
+To run the image on a machine that is NOT Apple silicon (i.e. Windows and Intel Macs):
+- Install Docker 
+- Start the Docker Daemon
+- `docker pull ghcr.io/sampsyo/cs3410-infra`
+- `docker run -it -v --rm <absolute path to "shared">:/root gchr.io/sampsyo/cs3410-infra bash`
+
+To run the image on Apple silicon: 
+- Install Docker (`brew install --cask docker`)
+- Start Docker using `docker ps` 
+- `docker pull ghcr.io/sampsyo/cs3410-infra`
+- `docker run -it -v --rm <absolute path to "shared">:/root gchr.io/sampsyo/cs3410-infra bash`
+
+Notes:
+- The shared folder you are on must exist locally. Create some directory on your machine for your 3410 work this semester, and use this as your shared directory 
+- In the container, you'll be able to access these files by going to `/home/student/shared` (`cd /home/student/shared`)
+- On Windows, remember to provide the absolute path to the shared folder in Windows form (starting with `C:`).
