@@ -54,4 +54,4 @@ To run the image on Apple silicon:
 Notes:
 - The shared folder you are on must exist locally. Create some directory on your machine for your 3410 work this semester, and use this as your shared directory 
 - In the container, you'll be able to access these files by going to `/home/student/shared` (`cd /home/student/shared`)
-- On windows, remember to provide the absolute path to the shared folder in windows form (starting with C:)
+- On Windows, remember to provide the absolute path to the shared folder in Windows form (starting with `C:`).
