@@ -37,7 +37,7 @@ RUN ./configure --target-list=riscv32-linux-user && make -j
 FROM docker.io/ubuntu:24.04
 RUN apt-get update && \
     apt-get install -y python3-dev libmpc-dev libglib2.0 git \
-        device-tree-compiler \
+        device-tree-compiler && \
     apt-get clean
 
 # Add the various tools.
