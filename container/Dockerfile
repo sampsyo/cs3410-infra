@@ -43,7 +43,7 @@ COPY --from=qemu /qemu-9.0.0/build/qemu-riscv32 /usr/local/bin/
 COPY --from=toolchain /opt/riscv /opt/riscv
 COPY --from=spike /opt/riscv /opt/riscv
 COPY cs3410-setup.sh /usr/local/bin/cs3410-setup.sh
-# RUN chmod +x /usr/local/bin/cs3410-setup.sh
+RUN chmod +x /usr/local/bin/cs3410-setup.sh
 ENTRYPOINT ["/usr/local/bin/cs3410-setup.sh"]
 CMD ["source /usr/local/bin/cs3410-setup.sh"]
 env PATH $PATH:/opt/riscv/bin
