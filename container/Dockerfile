@@ -39,11 +39,15 @@ RUN apt-get update && \
     apt-get install -y python3-dev libmpc-dev libglib2.0 git \
         device-tree-compiler \
     apt-get clean
+
+# Add the various tools.
 COPY --from=qemu /qemu-9.0.0/build/qemu-riscv32 /usr/local/bin/
 COPY --from=toolchain /opt/riscv /opt/riscv
 COPY --from=spike /opt/riscv /opt/riscv
-# COPY cs3410-setup.sh /usr/local/bin/cs3410-setup.sh
-# RUN chmod +x /usr/local/bin/cs3410-setup.sh
-# RUN /bin/bash -c "source /usr/local/bin/cs3410-setup.sh"
+
+# Create unprefixed symlinks to the GNU tools.
+COPY mklinks.sh /
+RUN bash /mklinks.sh
+
 env PATH $PATH:/opt/riscv/bin
 WORKDIR /root
