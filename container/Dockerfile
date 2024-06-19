@@ -49,5 +49,9 @@ COPY --from=spike /opt/riscv /opt/riscv
 COPY mklinks.sh /
 RUN bash /mklinks.sh
 
+# Some useful configuration for Qemu.
+ENV QEMU_LD_PREFIX=/opt/riscv/sysroot
+ENV QEMU_GUEST_BASE=0x14000
+
 env PATH $PATH:/opt/riscv/bin
 WORKDIR /root
