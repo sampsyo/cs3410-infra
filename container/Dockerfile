@@ -36,10 +36,14 @@ RUN ./configure --target-list=riscv32-linux-user && make -j
 FROM docker.io/ubuntu:24.04
 RUN apt-get update && \
     apt-get install -y python3 libmpc-dev libglib2.0 git \
-    device-tree-compiler && \
+    device-tree-compiler \
+    python3.12 python3.12-dev && \
     apt-get clean
 COPY --from=qemu /qemu-9.0.0/build/qemu-riscv32 /usr/local/bin/
 COPY --from=toolchain /opt/riscv /opt/riscv
 COPY --from=spike /opt/riscv /opt/riscv
+COPY cs3410-setup.sh /usr/local/bin/cs3410-setup.sh
+RUN chmod +x /usr/local/bin/cs3410-setup.sh
 env PATH $PATH:/opt/riscv/bin
 WORKDIR /root
+CMD ["source /usr/local/bin/cs3410-setup.sh"]
