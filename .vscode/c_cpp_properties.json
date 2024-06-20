@@ -1,12 +1,12 @@
 {
     "configurations": [
         {
-            "compilerPath": "/opt/riscv/bin/riscv32-unknown-linux-gnu-gcc",
+            "compilerPath": "/opt/riscv/bin/riscv64-unknown-linux-gnu-gcc",
             "includePath": [
                 "/opt/riscv/sysroot/usr/include",
-                "/opt/riscv/lib/gcc/riscv32-unknown-linux-gnu/13.2.0/include",
-                "/opt/riscv/lib/gcc/riscv32-unknown-linux-gnu/13.2.0/include-fixed",
-                "/opt/riscv/riscv32-unknown-linux-gnu/include"
+                "/opt/riscv/lib/gcc/riscv64-unknown-linux-gnu/13.2.0/include",
+                "/opt/riscv/lib/gcc/riscv64-unknown-linux-gnu/13.2.0/include-fixed",
+                "/opt/riscv/riscv64-unknown-linux-gnu/include"
             ]
         }
     ],
