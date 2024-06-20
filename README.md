@@ -18,7 +18,7 @@ Here's an example showing compilation and execution of a C program:
     $ docker run -i -t --rm ghcr.io/sampsyo/cs3410-infra bash
     root@9d6d042c8aa2:~# printf '#include <stdio.h>\nint main() { printf("hi!\\n"); }\n' > hi.c
     root@9d6d042c8aa2:~# gcc hi.c
-    root@9d6d042c8aa2:~# qemu-riscv32 a.out
+    root@9d6d042c8aa2:~# qemu-riscv64 a.out
     hi!
 
 [depot]: https://depot.dev/?utm_source=capra
@@ -40,8 +40,8 @@ For example, here's how to do the same thing as above but with using files from 
     $ printf '#include <stdio.h>\nint main() { printf("hi!\\n"); }\n' > hi.c
     $ rv gcc hi.c
     $ file a.out
-    a.out: ELF 32-bit LSB executable, UCB RISC-V, double-float ABI, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-riscv32-ilp32d.so.1, for GNU/Linux 5.4.0, not stripped
-    $ rv qemu-riscv32 a.out
+    a.out: ELF 64-bit LSB executable, UCB RISC-V, double-float ABI, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-riscv64-ilp64d.so.1, for GNU/Linux 5.4.0, not stripped
+    $ rv qemu-riscv64 a.out
     hi!
 
 [volumes]: https://docs.docker.com/storage/volumes/

@@ -12,7 +12,7 @@ COPY gitconfig /root/.gitconfig
 RUN git clone --recursive --shallow-submodules \
    https://github.com/riscv/riscv-gnu-toolchain
 WORKDIR /riscv-gnu-toolchain
-RUN ./configure --prefix=/opt/riscv --with-arch=rv32g --with-abi=ilp32d && \
+RUN ./configure --prefix=/opt/riscv --with-arch=rv64g --with-abi=ilp64d && \
    make -j2 linux
 
 FROM env AS spike
@@ -24,7 +24,7 @@ RUN apt-get update && \
 RUN git clone \
     https://github.com/riscv-software-src/riscv-isa-sim.git
 WORKDIR /riscv-isa-sim/build
-RUN ../configure --prefix=/opt/riscv --with-arch=rv32g && \
+RUN ../configure --prefix=/opt/riscv --with-arch=rv64g && \
     make && \
     make install
 
@@ -32,7 +32,7 @@ FROM env AS qemu
 RUN curl -O https://download.qemu.org/qemu-9.0.0.tar.xz && \
     tar -xf qemu-9.0.0.tar.xz
 WORKDIR /qemu-9.0.0
-RUN ./configure --target-list=riscv32-linux-user && make -j
+RUN ./configure --target-list=riscv64-linux-user && make -j
 
 FROM docker.io/ubuntu:24.04
 RUN apt-get update && \
@@ -41,7 +41,7 @@ RUN apt-get update && \
     apt-get clean
 
 # Add the various tools.
-COPY --from=qemu /qemu-9.0.0/build/qemu-riscv32 /usr/local/bin/
+COPY --from=qemu /qemu-9.0.0/build/qemu-riscv64 /usr/local/bin/
 COPY --from=toolchain /opt/riscv /opt/riscv
 COPY --from=spike /opt/riscv /opt/riscv
 
