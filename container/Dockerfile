@@ -12,7 +12,7 @@ COPY gitconfig /root/.gitconfig
 RUN git clone --recursive --shallow-submodules \
    https://github.com/riscv/riscv-gnu-toolchain
 WORKDIR /riscv-gnu-toolchain
-RUN ./configure --prefix=/opt/riscv --with-arch=rv64g --with-abi=ilp64d && \
+RUN ./configure --prefix=/opt/riscv --with-arch=rv64g --with-abi=lp64d && \
    make -j2 linux
 
 FROM env AS spike
