@@ -10,7 +10,10 @@ COPY gitconfig /root/.gitconfig
 RUN git clone --recursive --shallow-submodules \
    https://github.com/riscv/riscv-gnu-toolchain
 WORKDIR /riscv-gnu-toolchain
-RUN ./configure --prefix=/opt/riscv --with-arch=rv64g --with-abi=lp64d && \
+ENV LDFLAGS="-L/usr/lib -lcrypt"
+ENV CPPFLAGS="-I/usr/include"
+RUN ./configure --prefix=/opt/riscv --with-arch=rv64g --with-abi=lp64d \
+        --enable-libsanitizer && \
    make -j2 linux
 
 FROM docker.io/ubuntu:24.04 AS spike
