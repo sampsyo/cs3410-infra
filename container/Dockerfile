@@ -11,22 +11,14 @@ FROM env AS toolchain
 COPY gitconfig /root/.gitconfig
 RUN git clone --recursive --shallow-submodules \
    https://github.com/riscv/riscv-gnu-toolchain
-WORKDIR /riscv-gnu-toolchain
-RUN ./configure --prefix=/opt/riscv --with-arch=rv64g --with-abi=lp64d && \
-   make -j2 linux
-
-FROM env AS spike
-COPY gitconfig /root/.gitconfig
-RUN apt-get update && \
-    apt-get install -y device-tree-compiler libboost-regex-dev \
-        libboost-system-dev libboost-thread-dev && \
+RUN apt-get update && \ 
+    apt-get install -y libcrypt-dev && \ 
     apt-get clean
-RUN git clone \
-    https://github.com/riscv-software-src/riscv-isa-sim.git
-WORKDIR /riscv-isa-sim/build
-RUN ../configure --prefix=/opt/riscv --with-arch=rv64g && \
-    make && \
-    make install
+ENV LDFLAGS="-L/usr/lib -lcrypt"
+ENV CPPFLAGS="-I/usr/include"
+WORKDIR /riscv-gnu-toolchain
+RUN ./configure --prefix=/opt/riscv --with-arch=rv64g --with-abi=lp64d --enable-libsanitizer && \
+   make -j2 linux
 
 FROM env AS qemu
 RUN curl -O https://download.qemu.org/qemu-9.0.0.tar.xz && \
@@ -43,7 +35,6 @@ RUN apt-get update && \
 # Add the various tools.
 COPY --from=qemu /qemu-9.0.0/build/qemu-riscv64 /usr/local/bin/
 COPY --from=toolchain /opt/riscv /opt/riscv
-COPY --from=spike /opt/riscv /opt/riscv
 
 # Create unprefixed symlinks to the GNU tools.
 COPY mklinks.sh /
