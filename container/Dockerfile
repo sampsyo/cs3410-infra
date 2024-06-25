@@ -17,7 +17,6 @@ RUN ./configure --prefix=/opt/riscv --with-arch=rv64g --with-abi=lp64d \
    make -j2 linux
 
 FROM docker.io/ubuntu:24.04 AS spike
-COPY gitconfig /root/.gitconfig
 RUN apt-get update && \
     apt-get install -y build-essential git device-tree-compiler \
         libboost-regex-dev libboost-system-dev libboost-thread-dev && \
