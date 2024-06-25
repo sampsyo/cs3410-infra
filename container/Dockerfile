@@ -1,25 +1,25 @@
-FROM docker.io/ubuntu:24.04 AS env
+FROM docker.io/ubuntu:24.04 AS toolchain
 RUN apt-get update && \
-    apt-get install -y build-essential curl git ninja-build \
-        autoconf automake autotools-dev libmpc-dev libmpfr-dev libgmp-dev \
-        gawk build-essential bison flex texinfo gperf libtool patchutils \
-        bc zlib1g-dev libexpat-dev cmake libglib2.0-dev libslirp-dev \
-        python3-pip python3-venv python3-sphinx-rtd-theme && \
+    apt-get install -y autoconf automake autotools-dev curl python3 \
+        python3-pip libmpc-dev libmpfr-dev libgmp-dev gawk \
+        build-essential bison flex texinfo gperf libtool patchutils bc \
+        zlib1g-dev libexpat-dev ninja-build git cmake libglib2.0-dev \
+        libslirp-dev && \
     apt-get clean
-
-FROM env AS toolchain
 COPY gitconfig /root/.gitconfig
-RUN git clone --recursive --shallow-submodules \
-   https://github.com/riscv/riscv-gnu-toolchain
+RUN git clone --depth 1 https://github.com/riscv/riscv-gnu-toolchain
 WORKDIR /riscv-gnu-toolchain
-RUN ./configure --prefix=/opt/riscv --with-arch=rv64g --with-abi=lp64d && \
+COPY gcc14.patch .
+RUN git apply --index gcc14.patch
+RUN git submodule update --init --recursive
+RUN ./configure --prefix=/opt/riscv --with-arch=rv64g --with-abi=lp64d \
+        --enable-libsanitizer && \
    make -j2 linux
 
-FROM env AS spike
-COPY gitconfig /root/.gitconfig
+FROM docker.io/ubuntu:24.04 AS spike
 RUN apt-get update && \
-    apt-get install -y device-tree-compiler libboost-regex-dev \
-        libboost-system-dev libboost-thread-dev && \
+    apt-get install -y build-essential git device-tree-compiler \
+        libboost-regex-dev libboost-system-dev libboost-thread-dev && \
     apt-get clean
 RUN git clone \
     https://github.com/riscv-software-src/riscv-isa-sim.git
@@ -28,7 +28,11 @@ RUN ../configure --prefix=/opt/riscv --with-arch=rv64g && \
     make && \
     make install
 
-FROM env AS qemu
+FROM docker.io/ubuntu:24.04 AS qemu
+RUN apt-get update && \
+    apt-get install -y build-essential curl libglib2.0-dev meson ninja-build \
+        python3-pip python3-venv python3-sphinx-rtd-theme && \
+    apt-get clean
 RUN curl -O https://download.qemu.org/qemu-9.0.0.tar.xz && \
     tar -xf qemu-9.0.0.tar.xz
 WORKDIR /qemu-9.0.0
