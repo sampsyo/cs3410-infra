@@ -15,3 +15,6 @@
 
 [url "https://git.sr.ht/~sourceware/gcc"]
     insteadOf = https://gcc.gnu.org/git/gcc.git
+
+[url "https://git.linaro.org/toolchain/dejagnu.git"]
+    insteadOf = https://git.savannah.gnu.org/git/dejagnu.git
