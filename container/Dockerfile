@@ -7,11 +7,11 @@ RUN apt-get update && \
         libslirp-dev libcrypt-dev && \
     apt-get clean
 COPY gitconfig /root/.gitconfig
-RUN git clone --recursive --shallow-submodules \
-   https://github.com/riscv/riscv-gnu-toolchain
+RUN git clone --depth 1 https://github.com/riscv/riscv-gnu-toolchain
 WORKDIR /riscv-gnu-toolchain
-ENV LDFLAGS="-L/usr/lib -lcrypt"
-ENV CPPFLAGS="-I/usr/include"
+COPY gcc14.patch .
+RUN patch -p1 < gcc14.patch
+RUN git submodule update --init --recursive
 RUN ./configure --prefix=/opt/riscv --with-arch=rv64g --with-abi=lp64d \
         --enable-libsanitizer && \
    make -j2 linux
