@@ -4,7 +4,7 @@ RUN apt-get update && \
         python3-pip libmpc-dev libmpfr-dev libgmp-dev gawk \
         build-essential bison flex texinfo gperf libtool patchutils bc \
         zlib1g-dev libexpat-dev ninja-build git cmake libglib2.0-dev \
-        libslirp-dev libcrypt-dev && \
+        libslirp-dev && \
     apt-get clean
 COPY gitconfig /root/.gitconfig
 RUN git clone --depth 1 https://github.com/riscv/riscv-gnu-toolchain
