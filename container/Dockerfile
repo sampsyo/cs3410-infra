@@ -1,6 +1,6 @@
 FROM docker.io/ubuntu:22.04 AS toolchain
-RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC \
-    apt-get update && \
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC \
     apt-get install -y autoconf automake autotools-dev curl python3 \
         python3-pip libmpc-dev libmpfr-dev libgmp-dev gawk \
         build-essential bison flex texinfo gperf libtool patchutils bc \
@@ -18,8 +18,8 @@ RUN ./configure --prefix=/opt/riscv --with-arch=rv64g --with-abi=lp64d \
    make -j2 linux
 
 FROM docker.io/ubuntu:22.04 AS spike
-RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC \
-    apt-get update && \
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC \
     apt-get install -y build-essential git device-tree-compiler \
         libboost-regex-dev libboost-system-dev libboost-thread-dev && \
     apt-get clean
@@ -31,8 +31,8 @@ RUN ../configure --prefix=/opt/riscv --with-arch=rv64g && \
     make install
 
 FROM docker.io/ubuntu:22.04 AS qemu
-RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC \
-    apt-get update && \
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC \
     apt-get install -y build-essential curl libglib2.0-dev meson ninja-build \
         python3-pip python3-venv python3-sphinx-rtd-theme && \
     apt-get clean
@@ -42,8 +42,8 @@ WORKDIR /qemu-9.0.0
 RUN ./configure --target-list=riscv64-linux-user && make -j
 
 FROM docker.io/ubuntu:22.04
-RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC \
-    apt-get update && \
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC \
     apt-get install -y python3-dev libmpc-dev libglib2.0 git \
         device-tree-compiler && \
     apt-get clean
