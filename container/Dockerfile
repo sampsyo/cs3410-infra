@@ -44,7 +44,7 @@ RUN ./configure --target-list=riscv64-linux-user && make -j
 FROM docker.io/ubuntu:22.04
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC \
-    apt-get install -y python3-dev libmpc-dev libglib2.0 git \
+    apt-get install -y python3-dev libmpc-dev libglib2.0 git make \
         device-tree-compiler && \
     apt-get clean
 
