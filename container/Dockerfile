@@ -17,7 +17,7 @@ RUN apt-get update && \
     apt-get clean
 
 # Add the various tools.
-COPY --from=qemu /qemu-9.0.0/build/qemu-riscv64 /usr/local/bin/
+COPY --from=qemu /qemu-9.0.2/build/qemu-riscv64 /usr/local/bin/
 
 # Create unprefixed symlinks to the GNU tools.
 # TK restore this?????
