@@ -61,5 +61,5 @@ RUN bash /mklinks.sh
 ENV QEMU_LD_PREFIX=/opt/riscv/sysroot
 ENV QEMU_GUEST_BASE=0x14000
 
-env PATH $PATH:/opt/riscv/bin
+ENV PATH=/opt/riscv/bin:$PATH
 WORKDIR /root
