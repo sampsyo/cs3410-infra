@@ -2,7 +2,7 @@
 BIN=/usr/bin
 DEST=/opt/riscv/bin
 PREFIX=riscv64-linux-gnu
-SUFFIX=12
+SUFFIX=14
 
 # Look for all the executables in $BIN starting with $PREFIX and symlink them
 # from an unprefixed (plain) name.
