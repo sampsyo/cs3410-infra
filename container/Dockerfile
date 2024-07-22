@@ -60,6 +60,7 @@ RUN bash /mklinks.sh
 # Some useful configuration for Qemu.
 ENV QEMU_LD_PREFIX=/opt/riscv/sysroot
 ENV QEMU_GUEST_BASE=0x14000
+ENV QEMU_RESERVED_VA=256G
 
 env PATH $PATH:/opt/riscv/bin
 WORKDIR /root
