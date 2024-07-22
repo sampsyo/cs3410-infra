@@ -66,5 +66,5 @@ ENV QEMU_RESERVED_VA=256G
 # Docker/Qemu. (It just prints an error after successful process exits.)
 ENV ASAN_OPTIONS=detect_leaks=0
 
-env PATH $PATH:/opt/riscv/bin
+ENV PATH=/opt/riscv/bin:$PATH
 WORKDIR /root
