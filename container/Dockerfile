@@ -6,13 +6,12 @@ RUN apt-get update && \
     apt-get clean
 
 # Create unprefixed symlinks to the GNU tools.
-# TK restore this?????
-# COPY mklinks.sh /
-# RUN bash /mklinks.sh
+COPY mklinks.sh /
+RUN bash /mklinks.sh
 
 # Some useful configuration for Qemu.
 ENV QEMU_LD_PREFIX=/usr/riscv64-linux-gnu
 ENV QEMU_GUEST_BASE=0x14000
 
-env PATH $PATH:/opt/riscv/bin
+env PATH /opt/riscv/bin:$PATH
 WORKDIR /root
