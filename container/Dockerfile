@@ -60,6 +60,11 @@ RUN bash /mklinks.sh
 # Some useful configuration for Qemu.
 ENV QEMU_LD_PREFIX=/opt/riscv/sysroot
 ENV QEMU_GUEST_BASE=0x14000
+ENV QEMU_RESERVED_VA=256G
+
+# Disable ASan's leak detection, which I can't currently get to work under
+# Docker/Qemu. (It just prints an error after successful process exits.)
+ENV ASAN_OPTIONS=detect_leaks=0
 
 ENV PATH=/opt/riscv/bin:$PATH
 WORKDIR /root
