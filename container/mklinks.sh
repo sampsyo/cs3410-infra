@@ -8,3 +8,6 @@ for fn in $BIN/$PREFIX-* ; do
     plainname=${fn#$BIN/$PREFIX-}
     ln -s $fn $BIN/$plainname
 done
+
+# Make a shorter name for qemu.
+ln -s `which qemu-risc64` /usr/local/bin/qemu
