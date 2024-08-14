@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 BIN=/opt/riscv/bin
 PREFIX=riscv64-unknown-linux-gnu
 
