@@ -10,4 +10,4 @@ for fn in $BIN/$PREFIX-* ; do
 done
 
 # Make a shorter name for qemu.
-ln -s `which qemu-risc64` /usr/local/bin/qemu
+ln -s `which qemu-riscv64` /usr/local/bin/qemu
