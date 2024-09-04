@@ -13,3 +13,6 @@ done
 
 # Make a shorter name for qemu.
 ln -s `which qemu-riscv64` /usr/local/bin/qemu
+
+# asbin function for A5
+echo 'asbin() { as "$1" -o tmp.o && objcopy tmp.o -O binary "${1%.*}.bin" && rm tmp.o;}' >> /etc/bash.bashrc
