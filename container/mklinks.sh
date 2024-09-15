@@ -14,5 +14,6 @@ done
 # Make a shorter name for qemu.
 ln -s `which qemu-riscv64` /usr/local/bin/qemu
 
-# asbin function for A5
-echo 'asbin() { as "$1" -o tmp.o && objcopy tmp.o -O binary "${1%.*}.bin" && rm tmp.o;}' >> /etc/bash.bashrc
+# Create asbin command
+echo -e '#!/bin/bash\nas "$1" -o tmp.o && objcopy tmp.o -O binary "${1%.*}.bin" && rm tmp.o\n' > /usr/local/bin/asbin
+chmod +x /usr/local/bin/asbin
