@@ -45,7 +45,7 @@ FROM docker.io/ubuntu:22.04
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC \
     apt-get install -y python3-dev libmpc-dev libglib2.0 git make \
-        device-tree-compiler && \
+        device-tree-compiler xxd && \
     apt-get clean
 
 # Add the various tools.
