@@ -23,6 +23,6 @@ echo -e '#!/bin/bash\nqemu -g 1234 "$1" & (sleep 0.5 && gdb -q -ex "target remot
 chmod +x /usr/local/bin/qemu-debug
 
 # Nop in case someone pastes rv / rv-debug alias into environment:
-echo -e '#!/bin/bash\neval "$@\n"' > /usr/local/bin/rv
+echo -e '#!/bin/bash\neval "$@"\n' > /usr/local/bin/rv
 chmod +x /usr/local/bin/rv
 cp /usr/local/bin/rv /usr/local/bin/rv-debug 
